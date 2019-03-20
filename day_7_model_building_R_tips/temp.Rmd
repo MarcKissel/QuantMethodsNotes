@@ -1,0 +1,22 @@
+---
+title: "my_data"
+author: "Marc Kissel"
+date: "2/27/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+i am  going to look at the diamonds dataset
+
+```{r}
+library(tidyverse)
+smaller <- diamonds %>%  filter(carat < 3)
+
+ggplot(data = smaller, mapping = aes(x = carat)) +   geom_histogram(binwidth = 0.1)
+```
+

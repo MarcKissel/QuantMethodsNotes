@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R basics</title>
+    <meta charset="utf-8">
+    <meta name="author" content="" />
+    <meta name="date" content="2019-01-25" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# R basics
+### 2019-01-25
+
+---
+
+
+
+
+
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+---
+name: intro_slide
+class: center, middle
+#Why use R
+
+## - It is more than just a way to run statistics. you can make nice figures, run computer simulations, create interactive apps, and even make a website!
+
+## - difference between a car and a bus
+
+---
+name: getting_help
+
+#No one knows everything about R. i often Google the same issue many times since i forget.  A great place to look for help is **Stack Overflow**
+
+---
+name: setup
+
+#Working with R
+
+## The *console* is where commands are run. you can write something in the console to speak directly to R, or write in the *source* and then send the script to the console. You can recognize the console since every lines starts with a '&gt;'
+
+--
+
+go to the console and type the following and then hit enter
+
+
+```r
+7 + 6
+```
+
+---
+you should see something like this:
+
+&gt; 7 + 6
+[1] 13
+
+note the [1], which tells you the line #. this becomes useful later on. also note it told you that 7 + 6 = 13. congrats! you just turned your expensive computer into a $5 calulator
+
+---
+name: how_R_thinks
+
+#Short overview of how R works
+
+##One way that i think about R that helps me to work it is to remember that everything in R is an "object." What this means is that in R we make objects (or we assign values to objects) and then do things to these objects.  
+
+###for example check out the code below
+
+
+```r
+a &lt;- 4
+```
+
+what this says is that we are going to create the object 'a' and then assign the value '4' to it. if you run the code in R Studio you will see that the 'environment'  panel now lists 'a' and gives its value.
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

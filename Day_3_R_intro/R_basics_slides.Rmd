@@ -1,0 +1,92 @@
+---
+title: "R basics"
+subtitle: ""  
+author: ""
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+solarized_dark(
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+)
+```
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+---
+name: intro_slide
+class: center, middle
+#Why use R
+
+## - It is more than just a way to run statistics. you can make nice figures, run computer simulations, create interactive apps, and even make a website!
+
+## - difference between a car and a bus
+
+---
+name: getting_help
+
+#No one knows everything about R. i often Google the same issue many times since i forget.  A great place to look for help is **Stack Overflow**
+
+---
+name: setup
+
+#Working with R
+
+## The *console* is where commands are run. you can write something in the console to speak directly to R, or write in the *source* and then send the script to the console. You can recognize the console since every lines starts with a '>'
+
+--
+
+go to the console and type the following and then hit enter
+
+```{r, echo = T, results='hide'}
+7 + 6
+```
+
+---
+you should see something like this:
+
+> 7 + 6
+[1] 13
+
+note the [1], which tells you the line #. this becomes useful later on. also note it told you that 7 + 6 = 13. congrats! you just turned your expensive computer into a $5 calulator
+
+---
+name: how_R_thinks
+
+#Short overview of how R works
+
+##One way that i think about R that helps me to work it is to remember that everything in R is an "object."  we make objects (or  assign values to objects) and then do things to these objects.  
+
+###for example check out the code below
+
+```{r assign value}
+a <- 4
+
+```
+
+what this says is that we are going to create the object 'a' and then assign the value '4' to it. if you run the code in R Studio you will see that the 'environment'  panel now lists 'a' and gives its value. 
+
+???
+what this says is that we are going to create the object 'a' and then assign the value '4' to it. if you run the code in R Studio you will see that the 'environment'  panel now lists 'a' and gives its value. 
+
+---
+
+#live examples

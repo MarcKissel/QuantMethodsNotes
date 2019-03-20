@@ -1,0 +1,396 @@
+---
+title: "working with data"
+author: "Marc Kissel"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+mono_light(
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+)
+```
+
+
+
+# Examples of stat fallacies or paradoxes?
+
+
+---
+
+
+Short video on the problems of big data:
+
+
+<iframe width="645" height="363" src="https://www.youtube.com/embed/_2u_eHHzRto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+---
+
+class: center, middle, inverse
+
+# How do we record/store/view data in a way that allows us to use it in the future
+
+## Best advice i can give you is to think of yourself as your own co-author, looking at the data 1 year from today
+---
+.center[
+# **Spreadsheets**
+______________
+]
+
+## Interactive computer application for organization, analysis and storage of data in tabular form. Table of cells arranged into rows and columns. A cell = box that holds data [source: Wikipedia].   
+
+###- Columns represented by letters, "A", "B", "C"
+###- Rows represented by numbers, 1, 2, 3, 
+
+## Difference between spreadsheet and a database?
+---
+
+background-image: url(images/ss.jpeg)
+background-size: contain 
+
+
+---
+
+background-image: url(images/Excel_3.jpg)
+background-size: contain 
+
+---
+# Problems with Spreadsheets
+
+
+## - Panko (2008) reported that in 13 audits of real-world spreadsheets, an average of 88% contained errors
+
+## - In general, fine for storing data bu not so great for analyzing/visualizing data
+
+## - Almost everyone uses them, though, and hard to get around it
+
+---
+.center[
+#  Spreadsheets programs
+________________________
+]
+.pull-left[
+### Excel
+### Google Sheets
+### Numbers
+### LibreOffice Online Calc
+### Airtable
+### Calligra
+]
+
+
+---
+
+
+# Excel
+________________
+
+## - People like to hate on Excel. Yet it is pretty standard in business and research
+
+# Excel horror stories
+ 
+## - Excel can turn gene names [into dates!](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-5-80)
+
+## - [Problems of dates](http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-excel-can-do-to-your-data/)
+
+
+---
+
+# So why do we use them?
+
+# Jenny Bryan's interview
+__________________________
+## - solves a lot of practical problems 
+
+## - come preinstalled
+
+## - does file organization for you
+
+## - reactive 
+
+## - for many, it is totes fine to use
+
+## - but if you do data analysis it can get annoying
+---
+
+class: inverse, center
+
+# Data organization
+________________________________
+
+
+# How can we setup data to be read by both humans *and* computers?
+
+--
+
+# How can it be setup so co-authors can understand it?
+
+--
+
+# How can we *avoid* mistakes
+
+
+---
+class: center, middle
+#data organization in spreadsheets
+
+
+## - be consistent
+
+--
+
+## - write dates like YYYY-MM-DD
+
+--
+
+## - don't leave any cells empty
+
+--
+
+## - put just one thing in a cell
+
+---
+class: center, middle
+#data organization in spreadsheets
+
+
+## - organize the data as a single rectangle
+
+--
+
+## - create a data dictionary
+
+--
+
+## - don't include calculations in the raw data files
+
+--
+
+## - don't use font color or highlighting as data
+
+---
+class: center, middle
+#data organization in spreadsheets
+
+
+## - choose good names for things
+
+--
+
+## - make backups
+
+--
+
+## - use data validation to avoid data entry errors
+
+--
+
+## - save the data in plain text files.
+
+
+---
+# class work
+
+handout on fixing spreadsheets
+
+
+
+---
+.center[# Types of data in a spreadsheet]
+________________________________
+.pull-left[
+### Character - "hello" "W" "sssdsada"
+### Numeric/Double - 3, 3.565
+### Integer - only whole numbers
+### Logical - TRUE, FALSE
+### Date - 2019-01-23
+### Factor - categorical data
+]
+
+.pull-right[
+## other terms to know
+
+### Atomic vector - collection of elements (**all the same**). 1D
+### lists - can have mix of data types. 1D
+### matrix - 2D array of numbers
+### data frame - every element of the list has same length. 2D
+
+]
+
+
+???
+lgl stands for logical, vectors that contain only TRUE or FALSE.
+int stands for integers. can't take decimals
+dbl stands for doubles, or real numbers.
+chr stands for character vectors, or strings.
+str stands for string....text
+factor are categorical data
+
+
+
+---
+## Names of columns  should make sense, have no spaces, and be consistent
+### CamelCase, snake_case,
+
+![](images/Bowman_woo_2018.jpg)
+
+
+---
+background-image: url(http://phdcomics.com/comics/archive/phd101212s.gif)
+
+---
+# Dates
+___________________
+## storing dates is very tricky. Most like the YYYY-MM-DD format. 
+
+## Excel stores dates as a number that says how many days have passed since a given date. But that *given date* isn't always the same!
+
+[excel-options-advanced]
+
+???
+
+# Excel can do some really strange things with dates
+
+http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-excel-can-do-to-your-data/
+
+
+https://uc3.cdlib.org/2014/04/09/abandon-all-hope-ye-who-enter-dates-in-excel/#fn2
+
+https://support.microsoft.com/en-us/help/214330/differences-between-the-1900-and-the-1904-date-system-in-excel
+
+---
+# don't leave cells open 
+_______________________
+
+## Instead, places with no info should have NA
+
+
+---
+# make backups and save data as plain text
+__________________________________
+# - learn how to  write-protect a file
+# - backup often to Google Drive
+# - do data analysis on a  **copy** of the data
+# - save it as a .csv or other text file
+
+???
+• On a Mac, right-click on the le in Finder and select \Get Info". In the menu
+that opens, there is a section at the bottom on \Sharing & Permissions". Click on
+\Privilege" for yourself and select \Read only".
+• In Windows, right-click on the le in Windows Explorer and select \Properties". In
+the \General" tab, there is a section at the bottom with \Attributes". Select the box
+for \Read-only" and click the \OK" button.
+
+---
+
+
+background-image: url(images/github.jpg)
+background-size: contain 
+
+
+---
+# data validation
+__________________________
+
+## Great feature of spreadsheets!
+## helps prevent errors
+
+
+
+---
+
+.center[
+# Text editors
+_________________
+]
+### - Get used to looking at data though a text editor, which views plain text, rather than a spreadsheet
+
+###- I tend to use Notepad, but there are [many other](https://en.wikipedia.org/wiki/Comparison_of_text_editors)
+
+### - one example of a CSV editor is [**Data Curator**](https://theodi.org.au/data-curator/) 
+
+
+---
+.center[ 
+# Class work, part 1:]
+
+##Now it is time to put what we talked about into practice. Everyone is going to get two objects that have candy in them. **Without talking to anyone else** i want you to create a spreadsheet of the *data* you have. Can use any spreadsheet program or do it on a piece of paper. 
+
+#Answer the questions on the handout. Then put the candy back in the eggs and/or eat the candy!
+
+if you have time, calculate some summary stats (mean, median, etc) if you know how to. if not, no worries :) 
+
+---
+
+
+.center[ 
+# Class work, part 2:]
+
+##Now, get into groups of 3. Share your data in the group and try to pool the data into one larger spreadsheet. 
+
+##Questions
+
+## 1. Was it easy to pool the data
+## 2. what problems did you have
+## 3. what might you do differently if you started with all the data
+
+# Now, create a new spreadsheet that works best for the data. Make sure it fits with the rules we discussed before
+
+
+---
+#next week:
+
+# look online and research/learn about one other spreadsheet besides Excel or Google sheets. 
+
+# try it out with some data (real or fake)
+# take notes on what you learned about it. does it seem good. what are the pluses and minuses 
+
+---
+#install R and R-Studio
+
+
+
+
+---
+
+---
+
+# background readings
+
+https://peerj.com/preprints/3183/
+https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history
+
+https://nacnudus.github.io/spreadsheet-munging-strategies/index.html
+http://comma-chameleon.io/  
+
+---
+
+class work:
+go to: https://datacarpentry.org/spreadsheet-ecology-lesson/02-common-mistakes/
+
+
+show figures 5 and fig 7 n pg12+ of bowman and woo and hvae them note what might be wrong and think about how to betwer store them
+
+---
+
+read: https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+
+then create a group google sheet wiht some data! play aroudn wth it for awhile
+---
+# for me
+
+1. everyone gets 2 eggs? put cand in each but not everyone gets the same type

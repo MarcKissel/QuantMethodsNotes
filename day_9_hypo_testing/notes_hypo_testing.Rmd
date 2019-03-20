@@ -1,0 +1,499 @@
+---
+title: "Hypothesis Testing"
+subtitle: ""  
+author: ""
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+duo_accent(
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+)
+```
+
+
+---
+#hypothesis testing!
+These  notes come mostly from LSWR and Modern Dive readings...
+
+
+![](https://media.tenor.com/images/4499c00cb6446e066b244a7859f695af/tenor.gif)
+---
+##types of logical reasoning 
+
+Induction - from specific observations to broader generalizations 
+
+Deduction - from general to specifics (top-down)
+
+![](https://danielmiessler.com/images/untitled.jpg)
+
+
+http://www.socialresearchmethods.net/kb/dedind.htm
+
+---
+
+
+https://www.youtube.com/watch?v=H9PY_3E3h2c
+
+ignore the title and note what kinds of 'reasoning' is going on.
+
+
+https://www.youtube.com/watch?v=H9PY_3E3h2c
+
+![](https://www.youtube.com/watch?v=H9PY_3E3h2c)
+
+
+---
+
+
+---
+
+###research hypotheses - a substantive & testable scientific claim. so a claim about human evolution/behavior/etc
+
+###Statistical hypotheses - mathematical precise & correspond to specific claims about the characteristics of the data generating mechanism
+
+##we  want to map our **research hypothesis** onto our **stats hypothesis**
+
+.center[
+example: my research hypothesis is that brain size increases
+          my statistical hypothesis is that Ѳ!= .5
+]
+
+#A statistical hypothesis test is a test of the statistical hypothesis, *not* the research hypothesis
+          
+
+---
+
+#step 2
+________
+
+## figure out your **null hypothesis**:
+
+here, my null will be that brain size stays the same, so Ѳ = .5
+
+I then go about trying to show that this null hypothesis is wrong!
+we assume the null  is true unless we can prove otherwise
+
+impt: goal is not to eliminate all errors but rather to minimize them 
+
+|keep null|reject null
+-|-|-
+null is true|correct|type 1 error
+null is false|type 2 error|correct
+
+
+---
+
+# Type I and Type II errors
+
+##If we reject a null hypothesis that is actually true <-  type I error
+
+##If we retain the null hypothesis when it is in fact false <-  type II error.
+
+Usually want to avoid Type 1 errors the most. In stats terms we want to control the prob of a Type 1 error, which is labeled as α
+
+"hypothesis test is said to have significance level α if the type I error rate is no larger than α."
+
+wait, what?
+
+---
+
+Type II
+
+but we want to keep both α and β small
+
+
+|keep null|reject null
+-|-|-
+null is true|1 -α (correct retention) |α
+null is false|β	|1- β	(power)
+
+
+
+---
+#Test statistic and sampling dist
+
+###let's imagine we want to test for ESP.
+
+#####Out of this World!
+
+###in a small group think about how you can do this:
+
+## - what would be the sci hypothesis and the statisitcl hypothesis
+## - What is the null
+
+## - what problems might you run into
+
+
+
+---
+
+###null = no ESP. if null is true, what do we expect? 
+
+####50 people get right? or 57? 99? 8?
+
+### have a quantity X that we can calculate by looking at our data; after looking at the value of X, we make a decision about whether to believe that the null hypothesis is correct, or to reject the null hypothesis in favor of the alternative. This is the **test statistic**
+
+##What values of the test stat would cause us to reject the null?
+
+
+---
+
+# We ask what the **sampling distribution of the test statistic** would be if the null hypothesis were actually true
+
+
+### in this  case, this is a binomial
+
+##X ~ Binomial (Ѳ,N)
+
+###N = 100
+##for null, Ѳ = .5
+ 
+ 
+---
+
+
+![](https://learningstatisticswithr.com/book/lsr_files/figure-html/samplingdist-1.png)
+
+
+???
+: The sampling distribution for our test statistic  X
+  when the null hypothesis is true. For our ESP scenario, this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is  
+θ=.5
+ , the sampling distribution says that the most likely value is 50 (our of 100) correct responses. Most of the probability mass lies between 40 and 60.
+
+---
+
+#Critical regions and critical values
+ 
+##What values of the test statistic *X* should lead us to reject the null?
+
+## **critical region**  corresponds to  values of X that would lead us to reject null hypothesis
+
+ - X should be very big or very small in order to reject the null hypothesis.
+ 
+ -If the null hypothesis is true, the sampling distribution of X is Binomialp0:5;Nq.
+ 
+ - If α = 05, the critical region must cover 5% of this sampling distribution.
+
+
+---
+
+![](https://learningstatisticswithr.com/book/lsr_files/figure-html/crit2-1.png)
+
+the critical region consists of the most extreme values, known as the tails of the distribution
+
+All that we have to do now is calculate the value of the test
+statistic for the real data (e.g., X = 62) and then compare it to the critical values to make our decision.
+Since 62 is greater than the critical value of 60, we would reject the null hypothesis. Or, to phrase it
+slightly differently, we say that the test has produced a significant result.
+
+---
+
+## one-sided vs. two-sided test
+
+![](https://learningstatisticswithr.com/book/lsr_files/figure-html/crit1-1.png)
+
+
+---
+P-values
+
+
+value of α|reject null?
+-|-|-
+ .05|Yes
+ .04|Yes
+ .03|Yes
+ .02|NO
+ .01|NO
+
+In our example, p-value = .021
+
+
+### p can be defined as the smallest Type I error rate (α) that you have to be willing to tolerate if you want to reject the null hypothesis.
+
+p ≤ α then reject
+P > α not reject
+  
+or, we can define it like this:
+
+###The probability that we would have observed a test statistic that is at least as extreme as the one we actually did get. If the data are extremely implausible according to the null hypothesis, then the null hypothesis is probably wrong.
+
+---
+
+both defs are ok
+________
+
+
+#What is wrong is if you say p value is "the probability that the null hypothesis is true".
+
+no no no no
+
+
+
+---
+
+lets try in R
+
+```{r echo=TRUE}
+binom.test( x =  62, n=100, p = .5)
+```
+
+---
+#what is your effect size?
+
+we also want to minimize β. let's face it, we don't want to fail to reject when the null actually is wrong!
+
+Stats folks talk about maximizing the power of the test.
+power = 1 - β
+
+
+https://istats.shinyapps.io/power/
+
+
+"In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down."
+
+
+---
+
+#effect size
+ 
+a way to  quantifying how **similar** the
+true state of the world is to the null hypothesis. or, how big is the di difference between the true population parameters, and the parameter values that
+are assumed by the null hypothesis?
+
+difference in ES study between theta  = .51 and theta = .8
+
+---
+
+#lets practice
+
+in a group come up with 4 different hypos related to anthropology. think about the sci hypo, the stat hypo, what the null and alt hypo is, what the sampling dist is, and how you might test?
+
+---
+# how do we do it in real world
+
+##X2 tests (categorcial data)
+## T-tests
+#ANOVA
+# regression 
+
+---
+#categorical data
+
+x2 or 'goodness of fit"
+
+examples 
+---
+## picking cards at random
+
+research hypothesis is that people don't choose cards randomly
+
+What would the null be here?
+
+---
+
+H0: All four suits are chosen with equal probability
+H1: At least one of the suit-choice probabilities isn't .25
+
+---
+
+H0: P = p(25, 25, 25, 25)
+H1: P != p(25, 25, 25, 25)
+
+note: usually goodness of fit test all cats are = but doesn't have to be
+
+---
+test statistic
+we have observed data O and probablites P...we want to measure how close O is to P..
+
+step 1. what are the expected frequencies if null is true.
+
+n = 200
+p2(diamonds) = .25
+
+Ei = N x Pi
+
+could do the math or...
+
+```{r}
+probabilities <- c(clubs = .25, diamonds = .25, hearts = .25, spades = .25)
+N <- 200
+
+expected <- N * probabilities
+```
+
+---
+#so we want to compare the Expected vs. the Observed numb of observations
+
+
+
+-|C|H|S|d
+ Expected |Yes| | |
+ observed|Yes
+ difference|Yes
+ .02|NO
+ .01|NO
+
+---
+#in R
+
+probabilities <- c(clubs = .25, diamonds = .25, hearts = .25, spades = .25)
+
+---
+
+people chose more hearts and fewer clubs than the null hypothesis predicted.
+but the negative number is odd...does it matter which way it devaites.
+no...so we can squre
+
+```{r}
+#(observed - expected)^2
+```
+
+so now we can tell that when # is large it means that null made a bad prections and when num is smll it made a ood prection
+
+
+```{r}
+#(observed - expected)^2 / expected
+```
+
+each tells us how big a mistake the null made when guessing what te values would be
+
+last step is to sum it all up
+
+```{r}
+#sum( (observed - expected)^2 / expected )
+```
+
+this is x^2 value. if it is small means the null was close...but how small?
+
+---
+SAmpling dist of the Goodness-of-Fit
+
+- simple answer: chi-squared (X^2) distribution with k- 1 degress of freedom
+
+- what *are* degrees of freedom!
+
+---
+
+FIG 12.2 
+
+---
+
+```{r}
+qchisq( p = .95, df = 3 )
+pchisq( q = 8.44, df = 3, lower.tail = FALSE )
+```
+
+---
+
+in r
+
+with lsr package
+
+```{r}
+#goodnessOfFitTest( cards$choice_1 )
+```
+
+
+```{r}
+#chisq.test( x = observed )
+```
+
+---
+
+```{r}
+#nullProbs <- c(clubs = .2, diamonds = .3, hearts = .3, spades = .2)
+
+#goodnessOfFitTest( x = cards$choice_1, p = nullProbs )
+```
+
+
+```{r}
+#chisq.test( x = observed, p = c(.2, .3, .3, .2) )
+```
+
+---
+#The X2 test of independence (or association)
+
+research hypothesis is that humans and robots answer the question in different ways", how can I construct a test of the null hypothesis that humans
+and robots answer the question the same way
+
+
+
+H0: All of the following are true:
+P11 = P12 (same probability of saying \puppy"),
+P21 = P22 (same probability of saying \
+ower"), and
+P31 = P32 (same probability of saying \data").
+
+---
+
+Calcuatlr expected frequence
+
+
+- for each of the observed counts Oij , we need to figure out what the
+null hypothesis would tell us to expect.
+
+Therefore, our expected frequency can be written as the product (i.e. multiplication) of the row total
+and the column total, divided by the total number of observations
+
+SKIPPED
+
+---
+
+Fisher's exact test
+McNemar Test
+
+---
+# comparing two means
+
+What if we want to compare  whetere an outcome varibae is higher in one group or another
+
+
+---
+# z- test (not really used, but useful when thinking about t-tests etc)
+
+z stat = it's equal to the number
+of standard errors that separate the observed sample mean X from the population mean mu predicted by the null hypothesis. Better yet, regardless of what the population parameters for the raw scores actually
+are, the 5% critical regions for z-test are always the same, as illustrated in Figure 13.3. And what this
+meant, way back in the days where people did all their statistics by hand, is that someone could publish
+a table like this:
+
+---
+
+#student's T-Test 
+
+##use when we don't know for sure the  true standard deviation
+
+assumption:
+normailty
+
+indepedence
+
+show the general eqation and exaplin what appens with it
+
+singal/noise
+
+https://www.youtube.com/watch?v=pTmLQvMM-1M
+
+https://youtu.be/pTmLQvMM-1M?t=285
+
+
+https://socialresearchmethods.net/kb/Assets/images/stat_t3.gif
+---
+#The independent samples t-test

@@ -1,0 +1,22 @@
+---
+title: "Untitled"
+author: "Marc Kissel"
+date: "1/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+rest_data <- read_csv("https://data.cityofnewyork.us/api/views/43nn-pn8j/rows.csv")
+
+rest_data <- rest_data %>% 
+        janitor::clean_names() %>%
+        select(-phone, -grade_date, -record_date, -building, -street)
+
+```
+
